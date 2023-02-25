@@ -5,3 +5,4 @@ elseif game.PlaceId == 14 then
 else
     loadstring(game:HttpGet("https://raw.githubusercontent.com/SoldoxD/NekoHub_Aimbot/main/Main"))()
 end
+-- Loader
