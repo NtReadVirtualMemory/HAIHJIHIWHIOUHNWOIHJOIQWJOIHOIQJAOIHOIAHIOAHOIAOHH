@@ -4,7 +4,7 @@
 
 ]]
 
-print("WallCheck v2")
+print("WallCheck V3")
 
 --// Cache
 
@@ -79,6 +79,7 @@ end
 
 
 function WallCheck(player2)
+    if getgenv().AirHub.Aimbot.Settings.WallCheck == true then
 
     -- Liste mit Objekten, die ignoriert werden sollen
     local player1 = game.Players.LocalPlayer
@@ -120,8 +121,12 @@ function WallCheck(player2)
         return false
     end
     
-    
+    else
+        return false 
     end
+end
+
+
 local function GetClosestPlayer()
 	if not Environment.Locked then
 		RequiredDistance = (Environment.FOVSettings.Enabled and Environment.FOVSettings.Amount or 2000)
