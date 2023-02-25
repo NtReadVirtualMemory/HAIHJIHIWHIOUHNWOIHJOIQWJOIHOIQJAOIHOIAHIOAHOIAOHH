@@ -265,15 +265,49 @@ ThirdPerson:AddSlider({
 
 --// TriggerBot
 
+
+local function TriggetBot()
+    local LocalPlayer = game.Players.LocalPlayer
+    local Players = game:GetService("Players")
+	local Mouse = LocalPlayer:GetMouse()
+
+	if Mouse then
+		local MouseHit = Mouse.Target.Parent
+
+		for i,v in pairs(Players:GetChildren()) do
+			if v.Name == MouseHit.Name then
+             if _G.TriggerBot_TeamCheck == true then
+                if v.Team ~= game.Players.LocalPlayer.Team then
+                    mouse1press()
+                    wait()
+                    mouse1release()
+                else
+                    -- Falsches Team
+                end
+            else
+                mouse1press()
+                wait()
+                mouse1release()
+            end
+
+			end
+		end
+	end 
+end
+
+local RunService = game:GetService("RunService")
+RunService.RenderStepped:Connect(function()
+    if _G.TriggerBot == true then
+        TriggetBot()
+    end
+end)
+
 TriggerBot:AddToggle({
 	Name = "Enable TriggerBot",
 	Value = Aimbot.Settings.TriggerBot,
 	Callback = function(New, Old)
-		Aimbot.Settings.TriggerBot = New
-
-		--TriggerBot here
-
-	end
+		_G.TriggerBot = New
+    end
 })
 
 
@@ -281,9 +315,7 @@ TriggerBot:AddToggle({
 	Name = "TriggerBot TeamCheck",
 	Value = Aimbot.Settings.TriggerBot_TeamCheck,
 	Callback = function(New, Old)
-		Aimbot.Settings.TriggerBot_TeamCheck = New
-
-		--TriggerBot TeamCheck here
+		_G.TriggerBot_TeamCheck = New
 
 	end
 })
