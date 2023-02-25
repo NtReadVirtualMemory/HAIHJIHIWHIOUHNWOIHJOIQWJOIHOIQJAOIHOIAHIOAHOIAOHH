@@ -46,6 +46,17 @@ local MainFrame = Library:CreateWindow({
 	Theme = [[{"__Designer.Colors.topGradient":"3F0C64","__Designer.Colors.section":"C259FB","__Designer.Colors.hoveredOptionBottom":"4819B4","__Designer.Background.ImageAssetID":"rbxassetid://4427304036","__Designer.Colors.selectedOption":"4E149C","__Designer.Colors.unselectedOption":"482271","__Designer.Files.WorkspaceFile":"AirHub","__Designer.Colors.unhoveredOptionTop":"310269","__Designer.Colors.outerBorder":"391D57","__Designer.Background.ImageColor":"69009C","__Designer.Colors.tabText":"B9B9B9","__Designer.Colors.elementBorder":"160B24","__Designer.Background.ImageTransparency":100,"__Designer.Colors.background":"1E1237","__Designer.Colors.innerBorder":"531E79","__Designer.Colors.bottomGradient":"361A60","__Designer.Colors.sectionBackground":"21002C","__Designer.Colors.hoveredOptionTop":"6B10F9","__Designer.Colors.otherElementText":"7B44A8","__Designer.Colors.main":"AB26FF","__Designer.Colors.elementText":"9F7DB5","__Designer.Colors.unhoveredOptionBottom":"3E0088","__Designer.Background.UseBackgroundImage":false}]]
 })
 
+
+--// Plyer Setting
+
+local PlayerSettings = {
+	WalkSpeed = 16,
+	JumpPower = 50,
+	Pov = 80
+}
+
+
+
 --// Tabs
 
 local AimbotTab = MainFrame:CreateTab({
@@ -58,6 +69,10 @@ local VisualsTab = MainFrame:CreateTab({
 
 local CrosshairTab = MainFrame:CreateTab({
 	Name = "Crosshair"
+})
+
+local PlayerTab = MainFrame:CreateTab({
+	Name = "Player"
 })
 
 local FunctionsTab = MainFrame:CreateTab({
@@ -82,9 +97,6 @@ local TriggerBot = AimbotTab:CreateSection({
 	Name = "TriggerBot",
 	Side = "Left"
 })
-
-
-
 
 
 local FOV_Values = AimbotTab:CreateSection({
@@ -147,6 +159,14 @@ local CrosshairSettings_CenterDot = CrosshairTab:CreateSection({
 	Name = "Center Dot Settings",
 	Side = "Right"
 })
+
+--// Player Sections
+
+local PlayerSection = PlayerTab:CreateSection({
+	Name = "Player Exploits"
+})
+
+
 
 --// Functions Sections
 
@@ -956,6 +976,66 @@ CrosshairSettings_CenterDot:AddToggle({
 	end
 }).Default = WallHack.Crosshair.Settings.CenterDotFilled
 
+
+--// Player
+
+PlayerSection:AddSlider({
+	Name = "Walkspeed",
+	Value = PlayerSettings.WalkSpeed,
+	Callback = function(New, Old)
+		_G.WalkSpeedLoop = New
+		print("Changed WA to "..New)
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = New
+	end,
+	Min = 0,
+	Max = 300,
+	Decimals = 1
+}).Default = PlayerSettings.WalkSpeed
+
+
+
+PlayerSection:AddSlider({
+	Name = "JumpPower",
+	Value = PlayerSettings.JumpPower,
+	Callback = function(New, Old)
+		_G.JumpppowerLoop = New
+		game.Players.LocalPlayer.Character.Humanoid.JumpPower = New
+	end,
+	Min = 10,
+	Max = 500,
+	Decimals = 1
+}).Default = PlayerSettings.Jumpppower
+
+
+PlayerSection:AddSlider({
+	Name = "FOV",
+	Value = PlayerSettings.Pov,
+	Callback = function(New, Old)
+		_G.FOVLoop = New
+	end,
+	Min = 30,
+	Max = 180,
+	Decimals = 1
+}).Default = PlayerSettings.Pov
+
+
+
+local RunService = game:GetService("RunService")
+RunService.RenderStepped:Connect(function()
+	game.workspace.CurrentCamera.FieldOfView = _G.FOVLoop
+	game.Players.LocalPlayer.Character.Humanoid.JumpPower = _G.JumpPower
+	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = _G.WalkSpeedLoop
+
+end)
+
+game.Players.LocalPlayer.Character:WaitForChild("Humanoid"):GetPropertyChangedSignal("WalkSpeed"):Connect(function()
+	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = _G.WalkSpeedLoop
+end)
+
+game.Players.LocalPlayer.Character:WaitForChild("Humanoid"):GetPropertyChangedSignal("JumpPower"):Connect(function()
+	game.Players.LocalPlayer.Character.Humanoid.JumpPower = _G.JumpppowerLoop
+end)
+
 --// Functions / Functions
 
 FunctionsSection:AddButton({
@@ -981,8 +1061,8 @@ FunctionsSection:AddButton({
 })
 
 FunctionsSection:AddButton({
-	Name = "Copy Script Page",
+	Name = "Copy Discord",
 	Callback = function()
-		setclipboard("https://github.com/Exunys/AirHub")
+		setclipboard("https://discord.gg/DqnsjZvrxs")
 	end
 })
