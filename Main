@@ -272,24 +272,27 @@ local function TriggetBot()
 	local Mouse = LocalPlayer:GetMouse()
 
 	if Mouse then
-		local MouseHit = Mouse.Target.Parent
+		local BMouseHit = Mouse.Target
+		local MouseHit = BMouseHit.Parent
 
-		for i,v in pairs(Players:GetChildren()) do
-			if v.Name == MouseHit.Name then
-             if _G.TriggerBot_TeamCheck == true then
-                if v.Team ~= game.Players.LocalPlayer.Team then
-                    mouse1press()
-                    wait()
-                    mouse1release()
-                else
-                    -- Falsches Team
-                end
-            else
-                mouse1press()
-                wait()
-                mouse1release()
-            end
-
+		if BMouseHit and MouseHit then
+			for i,v in pairs(Players:GetChildren()) do
+				if v.Name == MouseHit.Name then
+				 if _G.TriggerBot_TeamCheck == true then
+					if v.Team ~= game.Players.LocalPlayer.Team then
+						mouse1press()
+						wait()
+						mouse1release()
+					else
+						-- Falsches Team
+					end
+				else
+					mouse1press()
+					wait()
+					mouse1release()
+				end
+	
+				end
 			end
 		end
 	end 
