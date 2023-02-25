@@ -79,6 +79,15 @@ local ThirdPerson = AimbotTab:CreateSection({
 	Name = "Third Person"
 })
 
+local TriggerBot = AimbotTab:CreateSection({
+	Name = "TriggerBot",
+	Side = "Left"
+})
+
+
+
+
+
 local FOV_Values = AimbotTab:CreateSection({
 	Name = "Field Of View",
 	Side = "Right"
@@ -88,6 +97,13 @@ local FOV_Appearance = AimbotTab:CreateSection({
 	Name = "FOV Circle Appearance",
 	Side = "Right"
 })
+
+
+
+
+
+
+
 
 --// Visuals Sections
 
@@ -242,6 +258,40 @@ ThirdPerson:AddSlider({
 	Max = 5,
 	Decimals = 1
 }).Default = Aimbot.Settings.ThirdPersonSensitivity
+
+
+
+
+
+
+--// TriggerBot
+
+TriggerBot:AddToggle({
+	Name = "Enable TriggerBot",
+	Value = Aimbot.Settings.TriggerBot,
+	Callback = function(New, Old)
+		Aimbot.Settings.TriggerBot = New
+
+		--TriggerBot here
+
+	end
+})
+
+
+TriggerBot:AddToggle({
+	Name = "TriggerBot TeamCheck",
+	Value = Aimbot.Settings.TriggerBot_TeamCheck,
+	Callback = function(New, Old)
+		Aimbot.Settings.TriggerBot_TeamCheck = New
+
+		--TriggerBot TeamCheck here
+
+	end
+})
+
+
+
+
 
 --// FOV Settings Values
 
