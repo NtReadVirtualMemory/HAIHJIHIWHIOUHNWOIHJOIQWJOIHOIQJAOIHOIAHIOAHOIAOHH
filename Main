@@ -1,8 +1,7 @@
 --[[
 
-	AirHub by Exunys © CC0 1.0 Universal (2023)
-
-	https://github.com/Exunys
+	NekoHub By Soldo#0444 and ¬_¬ Ɓoƨƨ ιƨ ʙɑck
+#5009 © CC0 1.0 Universal (2023)
 
 ]]
 
@@ -38,7 +37,7 @@ Library.UnloadCallback = function()
 end
 
 local MainFrame = Library:CreateWindow({
-	Name = "AirHub",
+	Name = "NekoHub",
 	Themeable = {
 		Image = "7059346386",
 		Info = "Made by Exunys\nPowered by Pepsi's UI Library",
