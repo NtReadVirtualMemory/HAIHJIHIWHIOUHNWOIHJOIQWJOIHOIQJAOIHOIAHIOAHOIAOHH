@@ -74,6 +74,52 @@ local function CancelLock()
 	end
 end
 
+
+
+function WallCheck(player2)
+
+    -- Liste mit Objekten, die ignoriert werden sollen
+    local player1 = game.Players.LocalPlayer
+    local ignoreList = {}
+    
+    -- Positionen der Köpfe der Spieler abrufen
+    local headPos1 = player1.Character.Head.Position
+    local headPos2 = player2.Character.Head.Position
+    
+    -- Richtungsvektor des Rays berechnen
+    local rayDirection = (headPos2 - headPos1).Unit * 1000
+    
+    -- Raycast durchführen
+    local raycastParams = RaycastParams.new()
+    raycastParams.FilterType = Enum.RaycastFilterType.Blacklist
+    raycastParams.FilterDescendantsInstances = {player1.Character, player2.Character}
+    
+    local raycastResult = workspace:Raycast(headPos1, rayDirection, raycastParams)
+    
+    -- Prüfen, ob der Ray eine Wand trifft
+    if raycastResult then
+        -- Abstand zwischen der Wand und den Köpfen der Spieler berechnen
+        local obstacleHitPos = raycastResult.Position
+        local distanceToObstacle = (obstacleHitPos - headPos1).Magnitude
+        
+        -- Abstand zwischen den Köpfen der Spieler berechnen
+        local distanceBetweenPlayers = (headPos2 - headPos1).Magnitude
+        
+        -- Prüfen, ob die Spieler zwischen der Wand sind
+        if distanceToObstacle < distanceBetweenPlayers then
+            print("Die Spieler sind zwischen einer Wand.")
+            return true
+        else
+            print("Die Spieler sind nicht zwischen einer Wand.")
+            return false
+        end
+    else
+        print("Der Raycast hat keine Wand getroffen.")
+        return false
+    end
+    
+    
+    end
 local function GetClosestPlayer()
 	if not Environment.Locked then
 		RequiredDistance = (Environment.FOVSettings.Enabled and Environment.FOVSettings.Amount or 2000)
@@ -82,7 +128,7 @@ local function GetClosestPlayer()
 			if v ~= LocalPlayer and v.Character and v.Character:FindFirstChild(Environment.Settings.LockPart) and v.Character:FindFirstChildOfClass("Humanoid") then
 				if Environment.Settings.TeamCheck and v.TeamColor == LocalPlayer.TeamColor then continue end
 				if Environment.Settings.AliveCheck and v.Character:FindFirstChildOfClass("Humanoid").Health <= 0 then continue end
-				if Environment.Settings.WallCheck and #(Camera:GetPartsObscuringTarget({v.Character[Environment.Settings.LockPart].Position}, v.Character:GetDescendants())) > 0 then continue end
+				if WallCheck(v) == false then 
 
 				local Vector, OnScreen = Camera:WorldToViewportPoint(v.Character[Environment.Settings.LockPart].Position); Vector = ConvertVector(Vector)
 				local Distance = (UserInputService:GetMouseLocation() - Vector).Magnitude
@@ -91,6 +137,7 @@ local function GetClosestPlayer()
 					RequiredDistance = Distance
 					Environment.Locked = v
 				end
+            end
 			end
 		end
 	elseif (UserInputService:GetMouseLocation() - ConvertVector(Camera:WorldToViewportPoint(Environment.Locked.Character[Environment.Settings.LockPart].Position))).Magnitude > RequiredDistance then
