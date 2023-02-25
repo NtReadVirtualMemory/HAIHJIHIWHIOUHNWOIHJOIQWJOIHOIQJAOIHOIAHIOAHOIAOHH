@@ -1,0 +1,7 @@
+if game.PlaceId == 13 then
+     print("LOL")
+elseif game.PlaceId == 14 then
+    print("lol2")
+else
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/SoldoxD/NekoHub_Aimbot/main/Main"))()
+end
