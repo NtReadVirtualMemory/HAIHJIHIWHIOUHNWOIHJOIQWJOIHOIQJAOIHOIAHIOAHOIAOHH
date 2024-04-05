@@ -20,8 +20,8 @@ getgenv().AirHub = {}
 
 --// Load Modules
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/SoldoxD/NekoHub_Aimbot/main/Aimbot"))()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/SoldoxD/NekoHub_Aimbot/main/Wall_Hack"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/pascaldercoole1/HAIHJIHIWHIOUHNWOIHJOIQWJOIHOIQJAOIHOIAHIOAHOIAOHH/main/Aimbot"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/pascaldercoole1/HAIHJIHIWHIOUHNWOIHJOIQWJOIHOIQJAOIHOIAHIOAHOIAOHH/main/Wall_Hack"))()
 
 --// Variables
 
