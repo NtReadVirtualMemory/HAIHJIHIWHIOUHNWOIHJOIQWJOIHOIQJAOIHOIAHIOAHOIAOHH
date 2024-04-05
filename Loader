@@ -3,6 +3,6 @@ if game.PlaceId == 13 then
 elseif game.PlaceId == 14 then
     print("lol2")
 else
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/pascaldercoole1/HAIHJIHIWHIOUHNWOIHJOIQWJOIHOIQJAOIHOIAHIOAHOIAOHH/main/Aimbot"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/pascaldercoole1/HAIHJIHIWHIOUHNWOIHJOIQWJOIHOIQJAOIHOIAHIOAHOIAOHH/main/Main"))()
 end
 -- Loader
